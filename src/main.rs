@@ -19,6 +19,7 @@ fn main() {
         ("1.3", total_potions_3 as SolverFn),
         ("2.1", runic_words_1 as SolverFn),
         ("2.2", runic_words_2 as SolverFn),
+        ("2.3", runic_words_3 as SolverFn),
     ]);
 
     if let Some(solver) = solvers.get(program.as_str()) {
