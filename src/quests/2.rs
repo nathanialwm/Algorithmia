@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-pub fn runic_words_1 (notes: String, ) -> i32 {
+pub fn runic_words_1(notes: String) -> i32 {
     let mut runic_words = 0;
     let (words, set, smallest, largest) = parser(&notes);
     for size in smallest..=largest {
@@ -23,7 +23,7 @@ pub fn runic_words_1 (notes: String, ) -> i32 {
     return runic_words as i32;
 }
 
-pub fn runic_words_2(notes:String) -> i32 {
+pub fn runic_words_2(notes: String) -> i32 {
     let mut runic_words = 0;
     // let mut debug_counter = 0;
     let (words, set, smallest, largest) = parser(&notes);
@@ -61,9 +61,12 @@ pub fn runic_words_2(notes:String) -> i32 {
 
 fn parser(notes: &String) -> (Vec<String>, HashSet<String>, usize, usize) {
     let mut set: HashSet<String> = HashSet::new();
-    let set_words = notes.lines()
-    .next().unwrap_or("")
-    .strip_prefix("WORDS:").unwrap_or("");
+    let set_words = notes
+        .lines()
+        .next()
+        .unwrap_or("")
+        .strip_prefix("WORDS:")
+        .unwrap_or("");
     for word in set_words.split(",") {
         let trimmed = word.trim();
         set.insert(trimmed.to_string());
@@ -78,4 +81,3 @@ fn parser(notes: &String) -> (Vec<String>, HashSet<String>, usize, usize) {
     let largest = set.iter().map(|w| w.len()).max().unwrap_or(0);
     return (words, set, smallest, largest);
 }
-

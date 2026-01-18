@@ -58,7 +58,7 @@ pub fn total_potions_3(notes: String) -> i32 {
             }
             if triple == 3 {
                 potions += 6;
-            } else if triple == 2{
+            } else if triple == 2 {
                 potions += 2;
             }
             triple = 0;
@@ -71,7 +71,6 @@ pub fn total_potions_3(notes: String) -> i32 {
                 'x' => triple -= 1,
                 _ => (),
             }
-            
         }
     });
     return potions;

@@ -1,48 +1,32 @@
+use Algorithmia::*;
+use std::collections::HashMap;
 use std::env;
 use std::fs;
-use Algorithmia::*;
+
+type SolverFn = fn(String) -> i32;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 1 {
-        eprintln!("Usage: {} <name>", args[1]);
+    if args.len() < 2 {
+        eprintln!("Usage: {} <quest.task>", args[0]);
         return;
     }
     let program = &args[1];
-    println!("Program number: {}", program);
-    match program.as_str() {
-        "1.1" => {
-            let notes = fs::read_to_string("./notes/1.1.txt")
-                .expect("Failed to read notes file");
-            let potions = total_potions_1(notes.to_string());
-            println!("Total potions: {}", potions);
-        }
-        "1.2" => {
-            let notes = fs::read_to_string("./notes/1.2.txt")
-                .expect("Failed to read notes file");
-            let potions = total_potions_2(notes.to_string());
-            println!("Total potions: {}", potions);
-        }
-        "1.3" => {
-            let notes = fs::read_to_string("./notes/1.3.txt")
-                .expect("Failed to read notes file");
-            let potions = total_potions_3(notes.to_string());
-            println!("Total potions: {}", potions);
-        }
-        "2.1" => {
-            let notes = fs::read_to_string("./notes/2.1.txt")
-                .expect("Failed to read notes file");
-            let result = runic_words_1(notes.to_string());
-            println!("Runic words result: {}", result);
-        }
-        "2.2" => {
-            let notes = fs::read_to_string("./notes/2.2.txt")
-                .expect("Failed to read notes file");
-            let result = runic_words_2(notes.to_string());
-            println!("Runic words result: {}", result);
-        }
-        _ => {
-            eprintln!("Unknown program: {}", program);
-        }
+
+    let solvers: HashMap<&str, SolverFn> = HashMap::from([
+        ("1.1", total_potions_1 as SolverFn),
+        ("1.2", total_potions_2 as SolverFn),
+        ("1.3", total_potions_3 as SolverFn),
+        ("2.1", runic_words_1 as SolverFn),
+        ("2.2", runic_words_2 as SolverFn),
+    ]);
+
+    if let Some(solver) = solvers.get(program.as_str()) {
+        let path = format!("./notes/{}.txt", program);
+        let notes = fs::read_to_string(&path).expect("Failed to read notes file");
+        let result = solver(notes);
+        println!("Program: {}\nResult: {}", program, result);
+    } else {
+        eprintln!("Unknown program: {}", program);
     }
 }
