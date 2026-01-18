@@ -35,6 +35,12 @@ fn main() {
             let result = runic_words_1(notes.to_string());
             println!("Runic words result: {}", result);
         }
+        "2.2" => {
+            let notes = fs::read_to_string("./notes/2.2.txt")
+                .expect("Failed to read notes file");
+            let result = runic_words_2(notes.to_string());
+            println!("Runic words result: {}", result);
+        }
         _ => {
             eprintln!("Unknown program: {}", program);
         }

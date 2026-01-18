@@ -17,10 +17,10 @@ My solutions for the coding quests on [everybody.codes](https://everybody.codes)
 | Quest | Status | Tasks Completed |
 |-------|--------|-----------------|
 | Quest 1 | Completed | 3/3 |
-| Quest 2 | In Progress | 1/? |
+| Quest 2 | In Progress | 2/? |
 | Quests 3-20 | Not Started | 0 |
 
-**Total tasks completed:** 4
+**Total tasks completed:** 5
 
 ## Installation
 
