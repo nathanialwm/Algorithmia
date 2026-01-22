@@ -2,10 +2,11 @@ use Algorithmia::*;
 use std::collections::HashMap;
 use std::env;
 use std::fs;
-
+use std::time::Instant;
 type SolverFn = fn(String) -> i32;
 
 fn main() {
+    let start = Instant::now();
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         eprintln!("Usage: {} <quest.task>", args[0]);
@@ -21,6 +22,11 @@ fn main() {
         ("2.2", runic_words_2 as SolverFn),
         ("2.3", runic_words_3 as SolverFn),
         ("3.1", mining_1 as SolverFn),
+        ("3.2", mining_1 as SolverFn),
+        ("3.3", mining_1 as SolverFn),
+        ("4.1", smithing_1 as SolverFn),
+        ("4.2", smithing_1 as SolverFn),
+        ("4.3", smithing_1 as SolverFn),
     ]);
 
     if let Some(solver) = solvers.get(program.as_str()) {
@@ -31,4 +37,6 @@ fn main() {
     } else {
         eprintln!("Unknown program: {}", program);
     }
+    let duration = start.elapsed();
+    println!("Time elapsed: {:?}", duration);
 }
